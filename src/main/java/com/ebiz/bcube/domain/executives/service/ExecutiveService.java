@@ -2,9 +2,9 @@ package com.ebiz.bcube.domain.executives.service;
 
 import com.ebiz.bcube.domain.executives.dto.ExecutivesDTO;
 import com.ebiz.bcube.domain.executives.entity.Executives;
-import com.ebiz.bcube.domain.executives.exception.FileNotFoundException;
 import com.ebiz.bcube.domain.executives.repository.ExecutivesRepository;
 import com.ebiz.bcube.global.application.OracleObjectStorageService;
+import com.ebiz.bcube.global.exception.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;

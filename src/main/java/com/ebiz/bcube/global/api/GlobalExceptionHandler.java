@@ -1,6 +1,6 @@
 package com.ebiz.bcube.global.api;
 
-import com.ebiz.bcube.domain.executives.exception.FileNotFoundException;
+import com.ebiz.bcube.global.exception.FileNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
