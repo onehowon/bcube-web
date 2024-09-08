@@ -28,14 +28,14 @@ out/
 !**/src/test/**/out/
 application.properties
 *.pem
-
+.oci/
 
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
-/.nb-gradle/
+/nb-gradle/
 
 ### VS Code ###
 .vscode/
