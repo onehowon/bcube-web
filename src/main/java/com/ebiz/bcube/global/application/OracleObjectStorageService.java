@@ -93,10 +93,54 @@ public class OracleObjectStorageService {
 
             return objectUrl;
         } catch (Exception e) {
-            System.err.println("Error uploading object: " + e.getMessage());
+            System.err.println("오브젝트 업로드 오류: " + e.getMessage());
             e.printStackTrace();
             throw e;
         }
+    }
+
+    public String uploadPdfObject(String pdfName, byte[] content) {
+        System.out.println("Uploading PDF object...");
+        System.out.println("Namespace: " + namespace);
+        System.out.println("Region: " + region);
+        System.out.println("Bucket Name: " + bucketName);
+        System.out.println("PDF Name: " + pdfName);
+
+        PutObjectRequest putObjectRequest = PutObjectRequest.builder()
+                .namespaceName(namespace)
+                .bucketName(bucketName)
+                .objectName(pdfName)
+                .putObjectBody(new ByteArrayInputStream(content))
+                .build();
+
+        System.out.println("PutObjectRequest created with:");
+        System.out.println("Namespace Name: " + putObjectRequest.getNamespaceName());
+        System.out.println("Bucket Name: " + putObjectRequest.getBucketName());
+        System.out.println("PDF Name: " + putObjectRequest.getObjectName());
+
+        try {
+            PutObjectResponse putObjectResponse = objectStorageClient.putObject(putObjectRequest);
+            String pdfUrl = String.format(
+                    "https://objectstorage.%s.oraclecloud.com/n/%s/b/%s/o/%s",
+                    region, namespace, bucketName, pdfName
+            );
+
+            System.out.println("PDF가 업로드 되었습니다 ETag: " + putObjectResponse.getETag());
+            System.out.println("PDF URL: " + pdfUrl);
+
+            return pdfUrl;
+        } catch (Exception e) {
+            System.err.println("Error uploading PDF: " + e.getMessage());
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    public String getFileUrl(String objectName) {
+        return String.format(
+                "https://objectstorage.%s.oraclecloud.com/n/%s/b/%s/o/%s",
+                region, namespace, bucketName, objectName
+        );
     }
 
     public String getNamespace() {
