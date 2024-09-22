@@ -96,10 +96,9 @@ public class ObInterviewService {
 
         // 업로드된 이미지의 URL 생성
         String imageUrl = String.format(
-                "https://%s.compat.objectstorage.%s.oraclecloud.com/n/%s/b/%s/o/%s",
-                objectStorageService.getNamespace(),
+                "https://objectstorage.%s.oraclecloud.com/n/%s/b/%s/o/%s",
                 objectStorageService.getRegion(),
-                objectStorageService.getBucketName(),
+                objectStorageService.getNamespace(),
                 objectStorageService.getBucketName(),
                 objectName
         );
