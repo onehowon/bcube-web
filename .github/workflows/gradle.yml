@@ -27,19 +27,10 @@ jobs:
         host: ${{ secrets.SERVER_HOST }}
         username: ${{ secrets.SERVER_USER }}
         key: ${{ secrets.SERVER_SSH_KEY }}
-        port: 22 # 필요시 포트 번호를 변경하세요
+        port: 22
         script: |
-          # 배포할 디렉토리로 이동
           cd /home/ubuntu
-
-          # 최신 코드 가져오기
           git pull origin main
-
-          # 빌드 실행
           ./gradlew build
-
-          # 기존 애플리케이션 종료 (필요 시)
           pkill -f bcube-0.0.1-SNAPSHOT.jar || true
-
-          # 새 애플리케이션 실행
           nohup java -jar bcube-0.0.1-SNAPSHOT.jar --spring.profiles.active=server > app.log 2>&1 &
