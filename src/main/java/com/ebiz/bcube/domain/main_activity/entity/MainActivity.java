@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "main_acitivty")
+@Table(name = "main_activity")
 public class MainActivity {
 
     @Id
@@ -26,4 +26,7 @@ public class MainActivity {
 
     @Column(name = "pdf_path", nullable = false)
     private String pdfPath;
+
+    @Column(name = "explain")
+    private String explain;
 }
