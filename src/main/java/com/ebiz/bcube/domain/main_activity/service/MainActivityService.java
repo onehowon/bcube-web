@@ -33,7 +33,7 @@ public class MainActivityService {
                 .imagePath(imageUrl)
                 .title(dto.getTitle())
                 .pdfPath(pdfUrl)
-                .explain(dto.getExplain())
+                .description(dto.getDescription())
                 .build();
 
         MainActivity savedMainActivity = mainActivityRepository.save(mainActivity);
@@ -62,7 +62,7 @@ public class MainActivityService {
                 .imagePath(imageUrl)
                 .title(dto.getTitle())
                 .pdfPath(pdfUrl)
-                .explain(dto.getExplain())
+                .description(dto.getDescription())
                 .build();
 
         MainActivity savedMainActivity = mainActivityRepository.save(updatedMainActivity);
@@ -90,6 +90,7 @@ public class MainActivityService {
                 .imagePath(mainActivity.getImagePath())
                 .title(mainActivity.getTitle())
                 .pdfPath(mainActivity.getPdfPath())
+                .description(mainActivity.getDescription())
                 .build();
     }
 }

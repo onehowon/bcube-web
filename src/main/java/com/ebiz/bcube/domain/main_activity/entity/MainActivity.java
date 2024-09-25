@@ -27,6 +27,6 @@ public class MainActivity {
     @Column(name = "pdf_path", nullable = false)
     private String pdfPath;
 
-    @Column(name = "explain")
-    private String explain;
+    @Column(name = "description")
+    private String description;
 }

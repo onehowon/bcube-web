@@ -11,5 +11,5 @@ public class MainActivityDTO {
     private String imagePath;
     private String title;
     private String pdfPath;
-    private String explain;
+    private String description;
 }
