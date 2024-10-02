@@ -56,7 +56,7 @@ public class ActivityPhotoService {
 
     public ActivityPhotoDTO updateActivityPhoto(Long id, String description, MultipartFile imageFile) throws IOException {
         ActivityPhoto existingActivityPhoto = repository.findById(id)
-                .orElseThrow(() -> new FileNotFoundException("id를 찾을 수 없습니다: " + id));
+                .orElseThrow(() -> new FileNotFoundException("사진 id를 찾을 수 없습니다. " + id));
 
         String imageUrl = saveImageAndGetUrl(imageFile);
 
@@ -75,7 +75,7 @@ public class ActivityPhotoService {
         if (repository.existsById(id)) {
             repository.deleteById(id);
         } else {
-            throw new FileNotFoundException("id를 찾을 수 없습니다: " + id);
+            throw new FileNotFoundException("사진 id를 찾을 수 없습니다. " + id);
         }
     }
 

@@ -48,12 +48,12 @@ public class StudyService {
 
     public StudyDTO getStudyById(Long id) {
         return studyRepository.findById(id).map(this::convertToDto)
-                .orElseThrow(() -> new FileNotFoundException("Study id not found: " + id));
+                .orElseThrow(() -> new FileNotFoundException("해당 스터디 활동을 찾을 수 없음: " + id));
     }
 
     public StudyDTO updateStudy(Long id, StudyDTO dto, MultipartFile imageFile) throws IOException {
         Study existingStudy = studyRepository.findById(id)
-                .orElseThrow(() -> new FileNotFoundException("Study id not found: " + id));
+                .orElseThrow(() -> new FileNotFoundException("해당 스터디 활동을 찾을 수 없음: " + id));
 
         String imageUrl = saveFileAndGetUrl(imageFile);
 
@@ -75,7 +75,7 @@ public class StudyService {
         if (studyRepository.existsById(id)) {
             studyRepository.deleteById(id);
         } else {
-            throw new FileNotFoundException("Study id not found: " + id);
+            throw new FileNotFoundException("해당 스터디 활동을 찾을 수 없음: " + id);
         }
     }
 

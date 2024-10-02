@@ -25,7 +25,7 @@ public class ActivityPhotoController {
 
     public ActivityPhotoController(ActivityPhotoService activityPhotoService, @Value("${oracle.cloud.bucket-url}") String bucketUrl) {
         this.activityPhotoService = activityPhotoService;
-        this.bucketUrl = bucketUrl;  // 필요하다면 사용
+        this.bucketUrl = bucketUrl;
     }
 
     @PostMapping

@@ -26,11 +26,10 @@ public class DesigntonService {
     }
 
     public DesigntonDTO createDesignton(DesigntonDTO dto, MultipartFile imageFile, MultipartFile pdfFile) throws IOException {
-        // 이미지와 PDF 파일을 각각 업로드하여 URL을 가져옴
-        String imageUrl = saveFileAndGetUrl(imageFile);
-        String pdfUrl = saveFileAndGetUrl(pdfFile); // pdfFile도 같은 방식으로 처리
 
-        // Designton 엔티티 빌더를 통해 저장할 객체 생성
+        String imageUrl = saveFileAndGetUrl(imageFile);
+        String pdfUrl = saveFileAndGetUrl(pdfFile);
+
         Designton designton = Designton.builder()
                 .year(dto.getYear())
                 .title(dto.getTitle())
@@ -39,10 +38,8 @@ public class DesigntonService {
                 .pdfFile(pdfUrl)
                 .build();
 
-        // 데이터베이스에 저장
         Designton savedDesignton = designtonRepository.save(designton);
 
-        // DTO 변환 및 반환
         return convertToDto(savedDesignton);
     }
 
@@ -60,11 +57,9 @@ public class DesigntonService {
         Designton existingDesignton = designtonRepository.findById(id)
                 .orElseThrow(() -> new FileNotFoundException("Designton id not found: " + id));
 
-        // 이미지와 PDF 파일을 각각 업로드하여 URL을 업데이트
         String imageUrl = saveFileAndGetUrl(imageFile);
         String pdfUrl = saveFileAndGetUrl(pdfFile);
 
-        // 기존 데이터를 업데이트
         Designton updatedDesignton = Designton.builder()
                 .id(existingDesignton.getId())
                 .year(dto.getYear())
@@ -74,10 +69,8 @@ public class DesigntonService {
                 .pdfFile(pdfUrl)
                 .build();
 
-        // 데이터베이스에 저장
         Designton savedDesignton = designtonRepository.save(updatedDesignton);
 
-        // DTO 변환 및 반환
         return convertToDto(savedDesignton);
     }
 
@@ -89,16 +82,14 @@ public class DesigntonService {
         }
     }
 
-    // 파일을 저장하고 URL을 반환하는 메서드
     private String saveFileAndGetUrl(MultipartFile file) throws IOException {
         String objectName = UUID.randomUUID().toString() + "-" + file.getOriginalFilename();
         byte[] content = file.getBytes();
-        // 파일을 업로드하고 URL을 반환
+
         objectStorageService.uploadObject(objectName, content);
         return objectStorageService.getFileUrl(objectName);
     }
 
-    // 엔티티를 DTO로 변환하는 메서드
     private DesigntonDTO convertToDto(Designton designton) {
         return DesigntonDTO.builder()
                 .id(designton.getId())

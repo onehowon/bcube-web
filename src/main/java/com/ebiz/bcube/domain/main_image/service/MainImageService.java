@@ -28,11 +28,9 @@ public class MainImageService {
         this.bucketUrl = bucketUrl;
     }
 
-    // Main Image 생성
     public MainImageDTO createMainImage(MultipartFile multipartFile) throws IOException {
         String imageUrl = saveImageAndGetUrl(multipartFile);
 
-        // 변수 이름을 다른 것으로 변경
         MainImage newMainImage = MainImage.builder()
                 .imagePath(imageUrl)
                 .build();
@@ -42,7 +40,6 @@ public class MainImageService {
         return convertToDto(savedMainImage);
     }
 
-    // 모든 Main Image 조회
     public List<MainImageDTO> getAllMainImages() {
         List<MainImage> mainImages = repository.findAll();
         return mainImages.stream()
@@ -50,14 +47,12 @@ public class MainImageService {
                 .toList();
     }
 
-    // ID로 Main Image 조회
     public MainImageDTO getMainImageById(Long id) {
         return repository.findById(id)
                 .map(this::convertToDto)
                 .orElseThrow(() -> new FileNotFoundException("메인 이미지를 찾을 수 없습니다. ID: " + id));
     }
 
-    // Main Image 업데이트
     public MainImageDTO updateMainImage(Long id, MultipartFile imageFile) throws IOException {
         MainImage existingMainImage = repository.findById(id)
                 .orElseThrow(() -> new FileNotFoundException("메인 이미지를 찾을 수 없습니다. ID: " + id));
@@ -74,7 +69,6 @@ public class MainImageService {
         return convertToDto(savedMainImage);
     }
 
-    // Main Image 삭제
     public void deleteMainImage(Long id) {
         if (repository.existsById(id)) {
             repository.deleteById(id);
@@ -83,7 +77,6 @@ public class MainImageService {
         }
     }
 
-    // Oracle Object Storage에 이미지 저장 및 URL 반환
     private String saveImageAndGetUrl(MultipartFile imageFile) throws IOException {
         String objectName = UUID.randomUUID().toString() + "-" + imageFile.getOriginalFilename();
         byte[] content = imageFile.getBytes();
@@ -102,7 +95,6 @@ public class MainImageService {
         return imageUrl;
     }
 
-    // Entity -> DTO 변환
     private MainImageDTO convertToDto(MainImage mainImage) {
         return MainImageDTO.builder()
                 .id(mainImage.getId())

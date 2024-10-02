@@ -26,7 +26,7 @@ public class ObInterviewController {
 
     public ObInterviewController(ObInterviewService obInterviewService, @Value("${oracle.cloud.bucket-url}") String bucketUrl) {
         this.obInterviewService = obInterviewService;
-        this.bucketUrl = bucketUrl;  // 필요하다면 사용
+        this.bucketUrl = bucketUrl;
     }
 
     @PostMapping
