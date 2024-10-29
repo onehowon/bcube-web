@@ -3,6 +3,7 @@ package com.ebiz.bcube.domain.activity_photo.api;
 import com.ebiz.bcube.domain.activity_photo.dto.ActivityPhotoDTO;
 import com.ebiz.bcube.domain.activity_photo.service.ActivityPhotoService;
 import java.io.IOException;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,6 +42,12 @@ public class ActivityPhotoController {
     public ResponseEntity<ActivityPhotoDTO> getActivityPhotoById(@PathVariable Long id) {
         ActivityPhotoDTO activityPhoto = activityPhotoService.getActivityPhotoById(id);
         return ResponseEntity.ok(activityPhoto);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ActivityPhotoDTO>> getAllActivityPhotos() {
+        List<ActivityPhotoDTO> activityPhotos = activityPhotoService.getAllActivityPhotos();
+        return ResponseEntity.ok(activityPhotos);
     }
 
     @PutMapping("/{id}")
