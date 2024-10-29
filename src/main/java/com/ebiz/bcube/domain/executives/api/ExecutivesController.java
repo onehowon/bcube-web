@@ -19,7 +19,7 @@ public class ExecutivesController {
 
     public ExecutivesController(ExecutiveService executiveService, @Value("${oracle.cloud.bucket-url}") String bucketUrl){
         this.executiveService = executiveService;
-        this.bucketUrl = bucketUrl;  // 필요하다면 사용
+        this.bucketUrl = bucketUrl;
     }
 
     @PostMapping

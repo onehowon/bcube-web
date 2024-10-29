@@ -48,12 +48,12 @@ public class EtcService {
 
     public EtcDTO getEtcById(Long id) {
         return etcRepository.findById(id).map(this::convertToDto)
-                .orElseThrow(() -> new FileNotFoundException("Etc id not found: " + id));
+                .orElseThrow(() -> new FileNotFoundException("해당 기타활동을 찾을 수 없음: " + id));
     }
 
     public EtcDTO updateEtc(Long id, EtcDTO dto, MultipartFile imageFile) throws IOException {
         Etc existingEtc = etcRepository.findById(id)
-                .orElseThrow(() -> new FileNotFoundException("Etc id not found: " + id));
+                .orElseThrow(() -> new FileNotFoundException("해당 기타활동을 찾을 수 없음: " + id));
 
         String imageUrl = saveFileAndGetUrl(imageFile);
 
@@ -75,7 +75,7 @@ public class EtcService {
         if (etcRepository.existsById(id)) {
             etcRepository.deleteById(id);
         } else {
-            throw new FileNotFoundException("Etc id not found: " + id);
+            throw new FileNotFoundException("해당 기타활동을 찾을 수 없음: " + id);
         }
     }
 

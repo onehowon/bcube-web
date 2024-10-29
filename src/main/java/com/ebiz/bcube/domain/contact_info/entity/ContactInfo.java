@@ -18,7 +18,7 @@ import org.hibernate.annotations.DynamicInsert;
 @AllArgsConstructor
 @NoArgsConstructor
 @DynamicInsert
-@Table(name = "conatct_info")
+@Table(name = "contact_info")
 public class ContactInfo {
 
     @Id

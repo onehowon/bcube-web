@@ -47,12 +47,12 @@ public class SexyItService {
 
     public SexyItDTO getSexyItById(Long id) {
         return sexyItRepository.findById(id).map(this::convertToDto)
-                .orElseThrow(() -> new FileNotFoundException("SexyIt id not found: " + id));
+                .orElseThrow(() -> new FileNotFoundException("해당 ID의 섹시한 IT를 찾을 수 없음: " + id));
     }
 
     public SexyItDTO updateSexyIt(Long id, SexyItDTO dto, MultipartFile imageFile) throws IOException {
         SexyIt existingSexyIt = sexyItRepository.findById(id)
-                .orElseThrow(() -> new FileNotFoundException("SexyIt id not found: " + id));
+                .orElseThrow(() -> new FileNotFoundException("해당 ID의 섹시한 IT를 찾을 수 없음: " + id));
 
         String imageUrl = saveFileAndGetUrl(imageFile);
 
@@ -73,7 +73,7 @@ public class SexyItService {
         if (sexyItRepository.existsById(id)) {
             sexyItRepository.deleteById(id);
         } else {
-            throw new FileNotFoundException("SexyIt id not found: " + id);
+            throw new FileNotFoundException("해당 ID의 섹시한 IT를 찾을 수 없음: " + id);
         }
     }
 

@@ -16,8 +16,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MainImageController {
     private final MainImageService mainImageService;
-
-    // 메인 이미지 생성 (이미지 업로드)
     @PostMapping
     public ResponseEntity<MainImageDTO> createMainImage(@RequestParam("file") MultipartFile multipartFile) {
         try {
@@ -28,14 +26,12 @@ public class MainImageController {
         }
     }
 
-    // 모든 메인 이미지 조회
     @GetMapping
     public ResponseEntity<List<MainImageDTO>> getAllMainImages() {
         List<MainImageDTO> mainImages = mainImageService.getAllMainImages();
         return new ResponseEntity<>(mainImages, HttpStatus.OK);
     }
 
-    // 특정 ID의 메인 이미지 조회
     @GetMapping("/{id}")
     public ResponseEntity<MainImageDTO> getMainImageById(@PathVariable Long id) {
         MainImageDTO mainImageDTO = mainImageService.getMainImageById(id);
@@ -45,8 +41,6 @@ public class MainImageController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
-    // 메인 이미지 업데이트 (이미지 교체)
     @PutMapping("/{id}")
     public ResponseEntity<MainImageDTO> updateMainImage(@PathVariable Long id, @RequestParam("file") MultipartFile multipartFile) {
         try {
@@ -57,7 +51,6 @@ public class MainImageController {
         }
     }
 
-    // 메인 이미지 삭제
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMainImage(@PathVariable Long id) {
         mainImageService.deleteMainImage(id);
