@@ -32,4 +32,7 @@ public class Etc {
 
     @Column(name = "url")
     private String url;
+
+    @Column(name = "pdf_url")
+    private String pdfUrl;
 }
