@@ -4,6 +4,7 @@ import com.ebiz.bcube.domain.activity_photo.dto.ActivityPhotoDTO;
 import com.ebiz.bcube.domain.activity_photo.service.ActivityPhotoService;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,12 @@ public class ActivityPhotoController {
     public ActivityPhotoController(ActivityPhotoService activityPhotoService, @Value("${oracle.cloud.bucket-url}") String bucketUrl) {
         this.activityPhotoService = activityPhotoService;
         this.bucketUrl = bucketUrl;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ActivityPhotoDTO>> getAllActivityPhotos() {
+        List<ActivityPhotoDTO> activityPhotos = activityPhotoService.getAllActivityPhotos();
+        return ResponseEntity.ok(activityPhotos);
     }
 
     @PostMapping

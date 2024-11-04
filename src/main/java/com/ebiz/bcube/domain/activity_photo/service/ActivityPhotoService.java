@@ -10,6 +10,8 @@ import com.ebiz.bcube.global.application.OracleObjectStorageService;
 import com.ebiz.bcube.global.exception.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
