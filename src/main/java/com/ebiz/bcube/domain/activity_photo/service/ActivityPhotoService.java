@@ -1,5 +1,6 @@
 package com.ebiz.bcube.domain.activity_photo.service;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 import com.ebiz.bcube.domain.activity_photo.dto.ActivityPhotoDTO;
@@ -28,12 +29,13 @@ public class ActivityPhotoService {
         this.bucketUrl = bucketUrl;
     }
 
-    public ActivityPhotoDTO createActivityPhoto(String description, MultipartFile multipartFile) throws IOException {
+    public ActivityPhotoDTO createActivityPhoto(String description, MultipartFile multipartFile, LocalDate date) throws IOException {
         String imageUrl = saveImageAndGetUrl(multipartFile);
 
         ActivityPhoto activityPhoto = ActivityPhoto.builder()
                 .description(description)
                 .imagePath(imageUrl)
+                .date(date)
                 .build();
 
         ActivityPhoto savedActivityPhoto = repository.save(activityPhoto);
@@ -106,6 +108,7 @@ public class ActivityPhotoService {
                 .id(activityPhoto.getId())
                 .description(activityPhoto.getDescription())
                 .imageUrl(activityPhoto.getImagePath())
+                .date(activityPhoto.getDate())
                 .build();
     }
 }

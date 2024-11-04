@@ -12,6 +12,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Builder
@@ -30,4 +33,7 @@ public class ActivityPhoto {
 
     @Column(name = "image_path")
     private String imagePath;
+
+    @Column(name = "date")
+    private LocalDate date;
 }
