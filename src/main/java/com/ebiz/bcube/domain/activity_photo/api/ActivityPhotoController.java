@@ -3,10 +3,7 @@ package com.ebiz.bcube.domain.activity_photo.api;
 import com.ebiz.bcube.domain.activity_photo.dto.ActivityPhotoDTO;
 import com.ebiz.bcube.domain.activity_photo.service.ActivityPhotoService;
 import java.io.IOException;
-import java.time.LocalDate;
-
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cglib.core.Local;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,10 +31,9 @@ public class ActivityPhotoController {
     @PostMapping
     public ResponseEntity<ActivityPhotoDTO> createActivityPhoto(
             @RequestParam("description") String description,
-            @RequestParam("image") MultipartFile multipartFile,
-            @RequestParam("date") LocalDate date) throws IOException {
+            @RequestParam("image") MultipartFile multipartFile) throws IOException {
 
-        ActivityPhotoDTO createdActivityPhoto = activityPhotoService.createActivityPhoto(description, multipartFile, date);
+        ActivityPhotoDTO createdActivityPhoto = activityPhotoService.createActivityPhoto(description, multipartFile);
         return new ResponseEntity<>(createdActivityPhoto, HttpStatus.CREATED);
     }
 
