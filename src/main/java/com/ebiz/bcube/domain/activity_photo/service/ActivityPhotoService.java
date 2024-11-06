@@ -84,16 +84,16 @@ public class ActivityPhotoService {
     }
 
     private String saveImageAndGetUrl(MultipartFile imageFile) throws IOException {
-        // 파일의 고유한 객체 이름 생성
+
         String objectName = UUID.randomUUID().toString() + "-" + imageFile.getOriginalFilename();
 
-        // MultipartFile을 바이트 배열로 변환
+
         byte[] content = imageFile.getBytes();
 
-        // OCI Object Storage에 이미지 업로드
+
         objectStorageService.uploadObject(objectName, content);
 
-        // 업로드된 이미지의 URL 생성
+
         String imageUrl = String.format(
                 "https://objectstorage.%s.oraclecloud.com/n/%s/b/%s/o/%s",
                 objectStorageService.getRegion(),

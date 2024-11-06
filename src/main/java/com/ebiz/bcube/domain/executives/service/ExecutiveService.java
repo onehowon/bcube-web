@@ -95,7 +95,6 @@ public class ExecutiveService {
 
         objectStorageService.uploadObject(objectName, content);
 
-        // 업로드된 이미지의 URL 생성
         String imageUrl = String.format(
                 "https://objectstorage.%s.oraclecloud.com/n/%s/b/%s/o/%s",
                 objectStorageService.getRegion(),
