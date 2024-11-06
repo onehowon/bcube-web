@@ -25,8 +25,9 @@ public class EtcService {
         this.etcRepository = etcRepository;
     }
 
-    public EtcDTO createEtc(EtcDTO dto, MultipartFile imageFile) throws IOException {
+    public EtcDTO createEtc(EtcDTO dto, MultipartFile imageFile, MultipartFile pdfFile) throws IOException {
         String imageUrl = saveFileAndGetUrl(imageFile);
+        String pdfUrl = pdfFile != null ? saveFileAndGetUrl(pdfFile) : null;
 
         Etc etc = Etc.builder()
                 .year(dto.getYear())
@@ -34,6 +35,7 @@ public class EtcService {
                 .participants(dto.getParticipants())
                 .imagePath(imageUrl)
                 .url(dto.getUrl())
+                .pdfUrl(pdfUrl)
                 .build();
 
         Etc savedEtc = etcRepository.save(etc);
@@ -51,11 +53,12 @@ public class EtcService {
                 .orElseThrow(() -> new FileNotFoundException("해당 기타활동을 찾을 수 없음: " + id));
     }
 
-    public EtcDTO updateEtc(Long id, EtcDTO dto, MultipartFile imageFile) throws IOException {
+    public EtcDTO updateEtc(Long id, EtcDTO dto, MultipartFile imageFile, MultipartFile pdfFile) throws IOException {
         Etc existingEtc = etcRepository.findById(id)
                 .orElseThrow(() -> new FileNotFoundException("해당 기타활동을 찾을 수 없음: " + id));
 
         String imageUrl = saveFileAndGetUrl(imageFile);
+        String pdfUrl = pdfFile != null ? saveFileAndGetUrl(pdfFile) : existingEtc.getPdfUrl();
 
         Etc updatedEtc = Etc.builder()
                 .id(existingEtc.getId())
@@ -64,6 +67,7 @@ public class EtcService {
                 .participants(dto.getParticipants())
                 .imagePath(imageUrl)
                 .url(dto.getUrl())
+                .pdfUrl(pdfUrl)
                 .build();
 
         Etc savedEtc = etcRepository.save(updatedEtc);
@@ -94,6 +98,7 @@ public class EtcService {
                 .participants(etc.getParticipants())
                 .imageUrl(etc.getImagePath())
                 .url(etc.getUrl())
+                .pdfUrl(etc.getPdfUrl() != null && !etc.getPdfUrl().isEmpty() ? etc.getPdfUrl() : null)  // 빈 문자열이면 null로 설정
                 .build();
     }
 }

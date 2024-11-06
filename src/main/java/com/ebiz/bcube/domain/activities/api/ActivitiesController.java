@@ -80,8 +80,19 @@ public class ActivitiesController {
     @PostMapping("/etc")
     public ResponseEntity<EtcDTO> createEtc(
             @ModelAttribute EtcDTO etcDTO,
-            @RequestParam("image") MultipartFile imageFile) throws IOException {
-        EtcDTO createdEtc = etcService.createEtc(etcDTO, imageFile);
+            @RequestParam("image") MultipartFile imageFile,
+            @RequestParam(value = "pdf", required = false) MultipartFile pdfFile,
+            @RequestParam(value = "url", required = false) String url) throws IOException {
+
+        etcDTO = EtcDTO.builder()
+                .id(etcDTO.getId())
+                .year(etcDTO.getYear())
+                .title(etcDTO.getTitle())
+                .participants(etcDTO.getParticipants())
+                .url(url != null ? url : "")
+                .build();
+
+        EtcDTO createdEtc = etcService.createEtc(etcDTO, imageFile, pdfFile);
         return new ResponseEntity<>(createdEtc, HttpStatus.CREATED);
     }
 
@@ -101,8 +112,19 @@ public class ActivitiesController {
     public ResponseEntity<EtcDTO> updateEtc(
             @PathVariable Long id,
             @ModelAttribute EtcDTO etcDTO,
-            @RequestParam("image") MultipartFile imageFile) throws IOException {
-        EtcDTO updatedEtc = etcService.updateEtc(id, etcDTO, imageFile);
+            @RequestParam("image") MultipartFile imageFile,
+            @RequestParam(value = "pdf", required = false) MultipartFile pdfFile,
+            @RequestParam(value = "url", required = false) String url) throws IOException {
+
+        etcDTO = EtcDTO.builder()
+                .id(etcDTO.getId())
+                .year(etcDTO.getYear())
+                .title(etcDTO.getTitle())
+                .participants(etcDTO.getParticipants())
+                .url(url != null ? url : "")
+                .build();
+
+        EtcDTO updatedEtc = etcService.updateEtc(id, etcDTO, imageFile, pdfFile);
         return ResponseEntity.ok(updatedEtc);
     }
 
