@@ -17,7 +17,8 @@
 - **기술 스택**:
   - **백엔드**: `Spring Framework`
   - **프론트엔드**: `React.js`
-  - **데이터베이스**: `Oracle`
+  - **서버** : `Oracle Cloud`
+  - **데이터베이스**: `MYSQL`
   - **스토리지**: `Object Storage`
 - **주요 기능**:
   1. **소개**: B-CUBE의 비전, 목표 및 활동 내용을 소개합니다.
